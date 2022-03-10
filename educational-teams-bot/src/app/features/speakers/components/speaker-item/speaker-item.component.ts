@@ -20,15 +20,15 @@ export class SpeakerItemComponent implements OnInit {
     console.log(this.speaker);
   }
   edit(){
-    console.log("salut ça marche je suis l'edit");
+    console.log("salut �a marche je suis l'edit");
     
   }
   tags(){
-    console.log("salut ça marche je suis la tag list");
+    console.log("salut �a marche je suis la tag list");
     
   }
   delete(){
-    console.log("salut ça marche je suis la destruction");
+    console.log("salut �a marche je suis la destruction");
     
   }
 

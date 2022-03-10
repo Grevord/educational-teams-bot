@@ -20,10 +20,11 @@ export class SpeakersComponent implements OnInit {
 
    edit(){
     console.log("salut ça marche je suis l'edit");
-    
+
+  ngOnInit(): void {
   }
   delete(){
-    console.log("salut ça marche je suis la destruction");
-    
-  }
+    console.log("salut �a marche je suis la destruction");
+
+}
 }
