@@ -22,7 +22,7 @@ export class TagsComponent implements OnInit {
      name: 'tag 3'
    }
  ];
- 
+
   constructor() { }
 
   ngOnInit(): void {
