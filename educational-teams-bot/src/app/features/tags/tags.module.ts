@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   declarations: [
     TagsComponent
   ],
-  imports: [    
+  imports: [
     CommonModule
   ]
 })
