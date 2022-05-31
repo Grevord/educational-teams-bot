@@ -26,8 +26,8 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         {
             try
             {
-                var tags = await this.Mediator.Send(new GetTagsQuery());
-                return this.Ok(tags);
+            var tags = await this.Mediator.Send(new GetTagsQuery());
+            return this.Ok(tags);
 
             }
             catch (Exception e)
