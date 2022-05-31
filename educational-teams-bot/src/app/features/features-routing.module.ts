@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'questions',
     component: QuestionsComponent
-  }
+  },
   {
     path: 'tags',
     component: TagsComponent,
