@@ -54,7 +54,7 @@
         
         "tagRessource":"[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('serverfarmName'))]",
         
-        "storageAccountsName": "[concat(resourceGroup().name, 'storage')]",
+        "storageAccountsName": "[concat(toLower(parameters('ressources_base_name')), '351storage')]",
          "puredAzureSearchName": "[replace(parameters('appName'), '-', '')]",
         "normalizedAzureSearchName": "[if(greater(length(variables('puredAzureSearchName')), 40), substring(variables('puredAzureSearchName'), sub(length(variables('puredAzureSearchName')), 40), 40) , variables('puredAzureSearchName'))]",
         "azureSearchName": "[toLower(concat(variables('normalizedAzureSearchName'), '-as', uniqueString(resourceGroup().id, variables('normalizedAzureSearchName'), parameters('azureSearchSku'), parameters('azureSearchLocation'), parameters('searchHostingMode'))))]"
