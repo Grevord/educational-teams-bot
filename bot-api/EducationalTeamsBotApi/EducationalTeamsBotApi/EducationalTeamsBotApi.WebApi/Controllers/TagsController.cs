@@ -24,8 +24,18 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetTags(string name)
         {
-            var tags = await this.Mediator.Send(new GetTagsQuery());
-            return this.Ok(tags);
+            try
+            {
+                var tags = await this.Mediator.Send(new GetTagsQuery());
+                return this.Ok(tags);
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            return this.Ok();
         }
 
         /// <summary>
