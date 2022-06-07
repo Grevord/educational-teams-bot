@@ -51,6 +51,9 @@ body {
     min-height:100vh;
 }
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .border-right {
     border-right: 0.1em solid $third-color;
     height: 100%;

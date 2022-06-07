@@ -22,6 +22,19 @@ export class SpeakersComponent implements OnInit {
     console.log("salut ça marche je suis l'edit");
 
   ngOnInit(): void {
+  constructor() { 
+    this.speakers = [new Speaker("abcd", "Michel Girard", "michel.girard@diiage.org", "Absent", [new Tag("a", "C#"), new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html")]),
+    new Speaker("dz", "Michel Girardot", "michel.girard@diiage.org", "Absent", [new Tag("a", "C#"), new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html") , new Tag("b", "html")])
+  ]
+
+  }
+
+  ngOnInit() {
+   }
+
+   edit(){
+    console.log("salut ça marche je suis l'edit");
+    
   }
   delete(){
     console.log("salut �a marche je suis la destruction");

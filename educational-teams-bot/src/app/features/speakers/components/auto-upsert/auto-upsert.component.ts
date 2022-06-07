@@ -18,7 +18,7 @@ export class AutoUpsertComponent implements OnInit {
     return this._object
   }
   set object(value: any) {
-   /* 
+   /*
     const properties = this.propertyOfObject(value);
     this.objectProperties = properties.reduce((acc, property) => {
 
@@ -38,28 +38,28 @@ export class AutoUpsertComponent implements OnInit {
     });
     this._object = value;
   }
-   objectProperties: any 
+   objectProperties: any
   tipe = require('tipe');
-  constructor(private autoCrudService: AutoCrudService,private fb: FormBuilder,@Inject(MAT_DIALOG_DATA, ) data: any) { 
+  constructor(private autoCrudService: AutoCrudService,private fb: FormBuilder,@Inject(MAT_DIALOG_DATA, ) data: any) {
 
     this.object = data['object']
     console.log(this.object);
-   
+
 
   }
 
   ngOnInit(): void {
-  
+
   }
   propertyOfObject(object:any) {
     return Object.keys(object)
-    
+
   }
 
   listOfType(type:any){
    let test = this.autoCrudService.fetchList(type[0].constructor.name.toLowerCase());
    console.log(test);
-   
+
     return ['Php', 'C#', 'CSS', 'HTML', 'JS', 'Java', 'Angular'];
   }
 }
