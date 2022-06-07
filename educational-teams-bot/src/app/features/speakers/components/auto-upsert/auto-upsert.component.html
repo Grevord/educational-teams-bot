@@ -1,0 +1,24 @@
+
+<div *ngIf="object != undefined">
+        <table style="width:100%">
+          <ng-container [formGroup]="myForm">
+            <tr *ngFor="let property of propertyOfObject(object)" >
+                    <th *ngIf="customType(object[property]) == true"><mat-form-field appearance="fill">
+                        <mat-label>{{property | titlecase}}</mat-label>
+                        <mat-select [formControlName]="property" multiple>
+                          <mat-option *ngFor="let option of listOfType(property)" [value]="option">{{option}}</mat-option>
+                        </mat-select>
+                      </mat-form-field></th>
+                    <th *ngIf="tipe(object[property]) != 'array' && property != 'id'">  <mat-form-field appearance="fill">
+                        <mat-label>{{property  | titlecase}}</mat-label>
+                        <input [formControlName]="property" matInput>
+                      </mat-form-field></th>
+                
+            </tr>
+            {{myForm.value | json}}
+          </ng-container>
+        </table>
+</div>
+<div *ngIf="object == undefined">
+    <div>Un problème est survenu durant le chargement des données</div>
+</div>

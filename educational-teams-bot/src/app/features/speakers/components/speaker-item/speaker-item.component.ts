@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Speaker } from 'src/app/shared/classes/speaker';
+import { Tag } from 'src/app/shared/classes/tag';
 
 @Component({
   selector: 'app-speaker-item',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpeakerItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() speaker!: Speaker;
+
+  constructor() { 
+
+    
+  }
 
   ngOnInit(): void {
+    console.log(this.speaker);
+  }
+  edit(){
+    console.log("salut ça marche je suis l'edit");
+    
+  }
+  tags(){
+    console.log("salut ça marche je suis la tag list");
+    
+  }
+  delete(){
+    console.log("salut ça marche je suis la destruction");
+    
   }
 
 }
