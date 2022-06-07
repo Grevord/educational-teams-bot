@@ -104,9 +104,17 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<Group>> GetTeams()
+        public async Task<IEnumerable<Team>> GetJoinedTeams()
         {
-            throw new NotImplementedException();
+            var teams = new List<Team>();
+
+            var requestResult = await this.graphServiceClient.Me.JoinedTeams
+                .Request()
+                .GetAsync();
+
+            teams.AddRange(requestResult);
+
+            return teams;
         }
 
         /// <inheritdoc/>

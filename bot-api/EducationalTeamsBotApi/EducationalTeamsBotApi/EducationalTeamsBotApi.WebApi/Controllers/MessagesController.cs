@@ -11,7 +11,6 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
     /// <summary>
     /// Controller allowing to interact with messages.
     /// </summary>
-    [Route("api/[controller]")]
     [ApiController]
     public class MessagesController : ApiBaseController
     {

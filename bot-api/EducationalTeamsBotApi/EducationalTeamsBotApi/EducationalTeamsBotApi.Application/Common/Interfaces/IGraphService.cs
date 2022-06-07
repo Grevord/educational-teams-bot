@@ -20,10 +20,10 @@ namespace EducationalTeamsBotApi.Application.Common.Interfaces
         Task<IEnumerable<User>> GetUsers();
 
         /// <summary>
-        /// Gets the list of teams of the organization.
+        /// Gets the list of joined teams of the connected user.
         /// </summary>
         /// <returns>A list of objects.</returns>
-        Task<IEnumerable<Group>> GetTeams();
+        Task<IEnumerable<Team>> GetJoinedTeams();
 
         /// <summary>
         /// Gets the list of messages.

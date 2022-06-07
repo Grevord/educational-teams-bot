@@ -14,7 +14,6 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
     /// <summary>
     /// Controller allowing to interact with speakers.
     /// </summary>
-    [Route("api/[controller]")]
     [ApiController]
     public class SpeakersController : ApiBaseController
     {
@@ -23,7 +22,6 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         /// </summary>
         /// <returns>A list of speakers.</returns>
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetSpeakers()
         {
             try
@@ -44,7 +42,6 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         /// <param name="id">Identifier of the speaker.</param>
         /// <returns>A list of speakers.</returns>
         [HttpGet("{id}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetSpeaker(string id)
         {
             try
