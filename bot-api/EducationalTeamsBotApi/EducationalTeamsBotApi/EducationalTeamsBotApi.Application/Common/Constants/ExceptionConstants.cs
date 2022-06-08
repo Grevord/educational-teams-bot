@@ -57,8 +57,13 @@ namespace EducationalTeamsBotApi.Application.Common.Constants
         public const string UnknownExceptionTitle = "An error occurred while processing your request.";
 
         /// <summary>
-        /// Exception to show if messages are already synced.
+        /// Conflict exception type.
         /// </summary>
-        public const string MessagesAlreadySynced = "Messages from this channel are already synced.";
+        public const string ConflictExceptionType = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.8";
+
+        /// <summary>
+        /// Exception to show if there is a conflict.
+        /// </summary>
+        public const string ConflictExceptionTitle = "A conflict occured while trying to update database.";
     }
 }

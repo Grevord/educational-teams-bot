@@ -33,6 +33,7 @@ namespace EducationalTeamsBotApi.WebApi.Filters
                 { typeof(NotFoundException), this.HandleNotFoundException },
                 { typeof(UnauthorizedAccessException), this.HandleUnauthorizedAccessException },
                 { typeof(ForbiddenAccessException), this.HandleForbiddenAccessException },
+                { typeof(ConflictException), this.HandleConflictException },
             };
         }
 
@@ -144,7 +145,7 @@ namespace EducationalTeamsBotApi.WebApi.Filters
         }
 
         /// <summary>
-        /// Handle the frobidden access exception.
+        /// Handle the forbidden access exception.
         /// </summary>
         /// <param name="context">Context of the exception.</param>
         private void HandleForbiddenAccessException(ExceptionContext context)
@@ -159,6 +160,27 @@ namespace EducationalTeamsBotApi.WebApi.Filters
             context.Result = new ObjectResult(details)
             {
                 StatusCode = StatusCodes.Status403Forbidden,
+            };
+
+            context.ExceptionHandled = true;
+        }
+
+        /// <summary>
+        /// Handle the conflict exception.
+        /// </summary>
+        /// <param name="context">Context of the exception.</param>
+        private void HandleConflictException(ExceptionContext context)
+        {
+            var details = new ProblemDetails
+            {
+                Status = StatusCodes.Status409Conflict,
+                Title = ExceptionConstants.ConflictExceptionTitle,
+                Type = ExceptionConstants.ConflictExceptionType,
+            };
+
+            context.Result = new ObjectResult(details)
+            {
+                StatusCode = StatusCodes.Status409Conflict,
             };
 
             context.ExceptionHandled = true;

@@ -27,6 +27,6 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         /// <summary>
         /// Gets the <see cref="ISender"/>.
         /// </summary>
-        protected ISender? Mediator => this.mediator ??= this.HttpContext.RequestServices.GetService<ISender>();
+        protected ISender Mediator => this.mediator ??= this.HttpContext.RequestServices.GetService<ISender>();
     }
 }

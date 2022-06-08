@@ -45,7 +45,7 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
             }
             else
             {
-                return this.Conflict(ExceptionConstants.MessagesAlreadySynced);
+                return this.StatusCode(409);
             }
         }
     }
