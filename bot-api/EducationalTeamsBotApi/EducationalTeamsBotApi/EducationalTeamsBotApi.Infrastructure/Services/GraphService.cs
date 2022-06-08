@@ -3,12 +3,14 @@
 // Copyright (c) DIIAGE 2022. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
+
 namespace EducationalTeamsBotApi.Infrastructure.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Azure.Identity;
+    using EducationalTeamsBotApi.Application.Common.Constants;
     using EducationalTeamsBotApi.Application.Common.Interfaces;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Graph;
@@ -37,10 +39,10 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
         public GraphService(IConfiguration configuration, ITokenService tokenService)
         {
             this.configuration = configuration;
-            var scopes = new[] { "User.Read" };
-            var tenantId = this.configuration["AzureAd:TenantId"];
-            var clientId = this.configuration["AzureAd:ClientId"];
-            var clientSecret = this.configuration["AzureAd:ClientSecret"];
+            var scopes = GraphConstants.Scopes;
+            var tenantId = this.configuration[GraphConstants.TenantId];
+            var clientId = this.configuration[GraphConstants.ClientId];
+            var clientSecret = this.configuration[GraphConstants.ClientSecret];
 
             var options = new TokenCredentialOptions
             {
@@ -53,10 +55,12 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
                 .WithClientSecret(clientSecret)
                 .Build();
 
-            var authProvider = new DelegateAuthenticationProvider(async (request) =>
+            var authProvider = new DelegateAuthenticationProvider((request) =>
             {
                 request.Headers.Authorization =
-                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tokenService.Token);
+                  new System.Net.Http.Headers.AuthenticationHeaderValue(GraphConstants.TokenScheme, tokenService.Token);
+
+                return Task.CompletedTask;
             });
 
             this.graphServiceClient = new GraphServiceClient(authProvider);
@@ -93,7 +97,7 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
         {
             var channels = new List<Channel>();
 
-            var requestResult = await this.graphServiceClient.Teams[$"{teamId}"].Channels
+            var requestResult = await this.graphServiceClient.Teams[teamId].Channels
                 .Request()
                 .GetAsync();
 
@@ -107,13 +111,11 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
         {
             var messages = new List<ChatMessage>();
 
-            var requestResult = await this.graphServiceClient.Teams[$"{teamId}"].Channels[$"{channelId}"].Messages
+            var requestResult = await this.graphServiceClient.Teams[teamId].Channels[channelId].Messages
                 .Request()
                 .GetAsync();
 
             messages.AddRange(requestResult);
-
-            /* TODO: Insert messages in DB if they does not exist in the query handler */
 
             return messages;
         }

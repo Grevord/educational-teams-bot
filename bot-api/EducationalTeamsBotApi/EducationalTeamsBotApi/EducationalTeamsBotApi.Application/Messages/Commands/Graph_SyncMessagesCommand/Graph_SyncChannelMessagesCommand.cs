@@ -16,11 +16,11 @@ namespace EducationalTeamsBotApi.Application.Messages.Commands.Graph_SyncMessage
         /// <summary>
         /// Gets or sets the team identifier.
         /// </summary>
-        public string TeamId { get; set; }
+        public string? TeamId { get; set; }
 
         /// <summary>
         /// Gets or sets the channel identifier.
         /// </summary>
-        public string ChannelId { get; set; }
+        public string? ChannelId { get; set; }
     }
 }

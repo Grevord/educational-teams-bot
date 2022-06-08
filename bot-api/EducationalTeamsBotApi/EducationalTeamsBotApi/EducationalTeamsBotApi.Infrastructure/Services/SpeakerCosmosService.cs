@@ -8,26 +8,36 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using EducationalTeamsBotApi.Application.Common.Constants;
     using EducationalTeamsBotApi.Application.Common.Interfaces;
     using EducationalTeamsBotApi.Domain.Entities;
     using Microsoft.Azure.Cosmos;
     using Microsoft.Azure.Cosmos.Linq;
-
 
     /// <summary>
     /// Class that will interact with the CosmosDB.
     /// </summary>
     public class SpeakerCosmosService : ISpeakerCosmosService
     {
+        /// <summary>
+        /// Cosmos client used in this service.
+        /// </summary>
         private readonly CosmosClient cosmosClient;
+
+        /// <summary>
+        /// Database used in this service.
+        /// </summary>
+        private readonly Database database;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpeakerCosmosService"/> class.
         /// </summary>
         public SpeakerCosmosService()
         {
-            var cosmosConString = Environment.GetEnvironmentVariable("COSMOS_CON_STRING");
+            var cosmosConString = Environment.GetEnvironmentVariable(DatabaseConstants.ConnectionString);
             this.cosmosClient = new CosmosClient(cosmosConString);
+
+            this.database = this.cosmosClient.GetDatabase(DatabaseConstants.Database);
         }
 
         /// <inheritdoc/>
@@ -57,8 +67,7 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
         /// <inheritdoc/>
         public async Task<IEnumerable<CosmosSpeaker>> GetCosmosSpeakers()
         {
-            var db = this.cosmosClient.GetDatabase("DiiageBotDatabase");
-            var container = db.GetContainer("Speakers");
+            var container = this.database.GetContainer(DatabaseConstants.SpeakerContainer);
             var speakers = container.GetItemLinqQueryable<CosmosSpeaker>();
             var iterator = speakers.ToFeedIterator();
             var results = await iterator.ReadNextAsync();
@@ -69,11 +78,10 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
         /// <inheritdoc/>
         public async Task<CosmosSpeaker> GetSpeaker(string id)
         {
-            var db = this.cosmosClient.GetDatabase("DiiageBotDatabase");
-            var container = db.GetContainer("Speakers");
-            var query = new QueryDefinition("SELECT * FROM c WHERE c.id = " + '"' + id + '"');
-            var speaker = container.GetItemQueryIterator<CosmosSpeaker>(query);
-            var result = await speaker.ReadNextAsync();
+            var container = this.database.GetContainer(DatabaseConstants.SpeakerContainer);
+            var q = container.GetItemLinqQueryable<CosmosSpeaker>();
+            var iterator = q.Where(x => x.Id == id).ToFeedIterator();
+            var result = await iterator.ReadNextAsync();
             return Tools.ToIEnumerable(result.GetEnumerator()).First();
         }
     }

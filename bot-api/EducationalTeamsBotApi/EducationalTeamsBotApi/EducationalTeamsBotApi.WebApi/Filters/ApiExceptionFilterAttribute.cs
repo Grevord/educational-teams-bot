@@ -4,15 +4,13 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using EducationalTeamsBotApi.Application.Common.Exceptions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-
 namespace EducationalTeamsBotApi.WebApi.Filters
 {
+    using EducationalTeamsBotApi.Application.Common.Constants;
+    using EducationalTeamsBotApi.Application.Common.Exceptions;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
+
     /// <summary>
     /// Class attribute to filter api exception.
     /// </summary>
@@ -74,16 +72,17 @@ namespace EducationalTeamsBotApi.WebApi.Filters
         /// <param name="context">Context of the exception.</param>
         private void HandleValidationException(ExceptionContext context)
         {
-            var exception = context.Exception as ValidationException;
-
-            var details = new ValidationProblemDetails(exception.Errors)
+            if (context.Exception is ValidationException exception)
             {
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
-            };
+                var details = new ValidationProblemDetails(exception.Errors)
+                {
+                    Type = ExceptionConstants.ValidationExceptionType,
+                };
 
-            context.Result = new BadRequestObjectResult(details);
+                context.Result = new BadRequestObjectResult(details);
 
-            context.ExceptionHandled = true;
+                context.ExceptionHandled = true;
+            }
         }
 
         /// <summary>
@@ -94,7 +93,7 @@ namespace EducationalTeamsBotApi.WebApi.Filters
         {
             var details = new ValidationProblemDetails(context.ModelState)
             {
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+                Type = ExceptionConstants.ValidationExceptionType,
             };
 
             context.Result = new BadRequestObjectResult(details);
@@ -108,18 +107,19 @@ namespace EducationalTeamsBotApi.WebApi.Filters
         /// <param name="context">Context of the exception.</param>
         private void HandleNotFoundException(ExceptionContext context)
         {
-            var exception = context.Exception as NotFoundException;
-
-            var details = new ProblemDetails()
+            if (context.Exception is ValidationException exception)
             {
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-                Title = "The specified resource was not found.",
-                Detail = exception.Message,
-            };
+                var details = new ProblemDetails()
+                {
+                    Type = ExceptionConstants.NotFoundExceptionType,
+                    Title = ExceptionConstants.NotFoundExceptionTitle,
+                    Detail = exception.Message,
+                };
 
-            context.Result = new NotFoundObjectResult(details);
+                context.Result = new NotFoundObjectResult(details);
 
-            context.ExceptionHandled = true;
+                context.ExceptionHandled = true;
+            }
         }
 
         /// <summary>
@@ -131,8 +131,8 @@ namespace EducationalTeamsBotApi.WebApi.Filters
             var details = new ProblemDetails
             {
                 Status = StatusCodes.Status401Unauthorized,
-                Title = "Unauthorized",
-                Type = "https://tools.ietf.org/html/rfc7235#section-3.1",
+                Title = ExceptionConstants.UnauthorizedExceptionTitle,
+                Type = ExceptionConstants.UnauthorizedExceptionType,
             };
 
             context.Result = new ObjectResult(details)
@@ -152,8 +152,8 @@ namespace EducationalTeamsBotApi.WebApi.Filters
             var details = new ProblemDetails
             {
                 Status = StatusCodes.Status403Forbidden,
-                Title = "Forbidden",
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3",
+                Title = ExceptionConstants.ForbiddenExceptionTitle,
+                Type = ExceptionConstants.ForbiddenExceptionType,
             };
 
             context.Result = new ObjectResult(details)
@@ -173,8 +173,8 @@ namespace EducationalTeamsBotApi.WebApi.Filters
             var details = new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
-                Title = "An error occurred while processing your request.",
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
+                Title = ExceptionConstants.UnknownExceptionTitle,
+                Type = ExceptionConstants.UnknownExceptionType,
             };
 
             context.Result = new ObjectResult(details)

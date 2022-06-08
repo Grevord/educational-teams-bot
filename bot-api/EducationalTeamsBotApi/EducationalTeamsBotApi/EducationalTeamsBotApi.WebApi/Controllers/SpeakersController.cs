@@ -29,10 +29,9 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
                 var speakers = await this.Mediator.Send(new GetSpeakersQuery());
                 return this.Ok(speakers);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
-                throw e;
+                throw;
             }
         }
 
@@ -46,13 +45,12 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         {
             try
             {
-                var speakers = await this.Mediator.Send(new GetSpeakerQuery { SpeakerId = id } );
+                var speakers = await this.Mediator.Send(new GetSpeakerQuery { SpeakerId = id });
                 return this.Ok(speakers);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
-                throw e;
+                throw;
             }
         }
     }

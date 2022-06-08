@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="GetSpeakerQueryHandler.cs" company="DIIAGE">
+// <copyright file="GetSpeakersQueryHandler.cs" company="DIIAGE">
 // Copyright (c) DIIAGE 2022. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -18,6 +18,9 @@ namespace EducationalTeamsBotApi.Application.Speakers.Queries.GetSpeakersQuery
     /// </summary>
     public class GetSpeakersQueryHandler : IRequestHandler<GetSpeakersQuery, IEnumerable<CosmosSpeaker>>
     {
+        /// <summary>
+        /// Speaker cosmos service used in this class.
+        /// </summary>
         private readonly ISpeakerCosmosService speakerCosmosService;
 
         /// <summary>

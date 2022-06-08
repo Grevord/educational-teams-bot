@@ -61,7 +61,7 @@ try
     });
 
     builder.Services.AddApplication();
-    builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.AddInfrastructure();
 
     builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
     builder.Services.AddHttpContextAccessor();

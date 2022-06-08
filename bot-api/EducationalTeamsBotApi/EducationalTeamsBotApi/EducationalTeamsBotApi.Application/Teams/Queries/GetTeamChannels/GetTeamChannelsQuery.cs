@@ -18,6 +18,6 @@ namespace EducationalTeamsBotApi.Application.Teams.Queries.GetTeamChannels
         /// <summary>
         /// Gets or sets the team ID.
         /// </summary>
-        public string TeamId { get; set; }
+        public string? TeamId { get; set; }
     }
 }

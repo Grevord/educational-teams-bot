@@ -8,13 +8,10 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using EducationalTeamsBotApi.Application.Common.Constants;
     using EducationalTeamsBotApi.Application.Common.Interfaces;
     using EducationalTeamsBotApi.Domain.Entities;
     using Microsoft.Azure.Cosmos;
-    using Microsoft.Azure.Cosmos.Linq;
-
-
-
 
     /// <summary>
     /// Class that will interact with the CosmosDB.
@@ -28,7 +25,7 @@ namespace EducationalTeamsBotApi.Infrastructure.Services
         /// </summary>
         public TagCosmosService()
         {
-            var cosmosConString = Environment.GetEnvironmentVariable("COSMOS_CON_STRING");
+            var cosmosConString = Environment.GetEnvironmentVariable(DatabaseConstants.ConnectionString);
             this.cosmosClient = new CosmosClient(cosmosConString);
         }
 

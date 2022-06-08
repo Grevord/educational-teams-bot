@@ -17,7 +17,9 @@ namespace EducationalTeamsBotApi.Application.Questions.Queries.GetAllQuestionsQu
     /// </summary>
     public class GetAllQuestionsQueryHandler : IRequestHandler<GetAllQuestionsQuery, IEnumerable<CosmosQuestion>>
     {
-
+        /// <summary>
+        /// Question cosmos service to use.
+        /// </summary>
         private readonly IQuestionCosmosService questionCosmosService;
 
         /// <summary>

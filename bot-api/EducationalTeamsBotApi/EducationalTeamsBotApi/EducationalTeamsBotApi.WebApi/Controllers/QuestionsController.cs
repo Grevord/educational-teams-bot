@@ -9,12 +9,8 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
     using EducationalTeamsBotApi.Application.Questions.Commands.AskQuestion;
     using EducationalTeamsBotApi.Application.Questions.Queries.GetAllQuestionsQuery;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Bot.Builder;
     using Microsoft.Bot.Schema;
-    using Microsoft.Bot.Connector.Teams;
-    using System.Xml;
 
     /// <summary>
     /// Controller allowing to interact with questions.
@@ -36,9 +32,9 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
                 var questions = await this.Mediator.Send(new GetAllQuestionsQuery());
                 return this.Ok(questions);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -55,14 +51,10 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
             {
                await this.Mediator.Send(new AskQuestionCommand { Activity = activity });
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
-                throw e;
+                throw;
             }
         }
-
-
-
     }
 }

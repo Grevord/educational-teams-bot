@@ -13,7 +13,7 @@ namespace EducationalTeamsBotApi.Application.Messages.Commands.Graph_SyncMessage
     using MediatR;
 
     /// <summary>
-    /// Handles
+    /// Handles the <see cref="Graph_SyncChannelMessagesCommand"/>.
     /// </summary>
     public class Graph_SyncChannelMessagesCommandHandler : IRequestHandler<Graph_SyncChannelMessagesCommand, bool>
     {

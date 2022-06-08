@@ -4,7 +4,6 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-
 namespace EducationalTeamsBotApi.Application.Questions.Commands.AskQuestion
 {
     using MediatR;
@@ -18,6 +17,6 @@ namespace EducationalTeamsBotApi.Application.Questions.Commands.AskQuestion
         /// <summary>
         /// Gets or sets The content of the question.
         /// </summary>
-        public Activity Activity { get; set; }
+        public Activity? Activity { get; set; }
     }
 }

@@ -3,8 +3,10 @@
 // Copyright (c) DIIAGE 2022. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
+
 namespace EducationalTeamsBotApi.WebApi.Controllers
 {
+    using EducationalTeamsBotApi.Application.Common.Constants;
     using EducationalTeamsBotApi.Application.Messages.Commands.Graph_SyncMessagesCommand;
     using EducationalTeamsBotApi.Application.Messages.Queries.GetMessagesQuery;
     using Microsoft.AspNetCore.Mvc;
@@ -35,7 +37,7 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         [HttpGet("sync")]
         public async Task<IActionResult> SyncGraphMessages(string teamId, string channelId)
         {
-            var result = await this.Mediator.Send(new Graph_SyncChannelMessagesCommand { TeamId = teamId, ChannelId = channelId});
+            var result = await this.Mediator.Send(new Graph_SyncChannelMessagesCommand { TeamId = teamId, ChannelId = channelId });
 
             if (result)
             {
@@ -43,7 +45,7 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
             }
             else
             {
-                return this.Conflict("Messages from this channel are already synced.");
+                return this.Conflict(ExceptionConstants.MessagesAlreadySynced);
             }
         }
     }

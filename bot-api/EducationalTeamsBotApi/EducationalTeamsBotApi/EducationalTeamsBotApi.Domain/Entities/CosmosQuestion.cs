@@ -52,7 +52,6 @@ namespace EducationalTeamsBotApi.Domain.Entities
         [JsonProperty("answers")]
         public IEnumerable<string> Answers { get; set; }
 
-
         /// <summary>
         /// Gets or sets the user id of a specific question.
         /// </summary>
