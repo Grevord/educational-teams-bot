@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="AddTagCommandHandler.cs" company="DIIAGE">
+// <copyright file="GetTagByNameQueryHandler.cs" company="DIIAGE">
 // Copyright (c) DIIAGE 2022. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace EducationalTeamsBotApi.Application.Tags.Commands.AddTagCommand
+namespace EducationalTeamsBotApi.Application.Tags.Queries.GetTagByNameQuery
 {
     using System.Threading.Tasks;
     using EducationalTeamsBotApi.Application.Common.Interfaces;
@@ -12,9 +12,9 @@ namespace EducationalTeamsBotApi.Application.Tags.Commands.AddTagCommand
     using MediatR;
 
     /// <summary>
-    /// Command handler for the tag creation.
+    /// Handler for the query that will search.
     /// </summary>
-    public class AddTagCommandHandler : IRequestHandler<AddTagCommand, CosmosTag?>
+    public class GetTagByNameQueryHandler : IRequestHandler<GetTagByNameQuery, CosmosTag?>
     {
         /// <summary>
         /// Tag service.
@@ -22,18 +22,18 @@ namespace EducationalTeamsBotApi.Application.Tags.Commands.AddTagCommand
         private readonly ITagCosmosService tagService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddTagCommandHandler"/> class.
+        /// Initializes a new instance of the <see cref="GetTagByNameQueryHandler"/> class.
         /// </summary>
-        /// <param name="tagService"> service of the tags.</param>
-        public AddTagCommandHandler(ITagCosmosService tagService)
+        /// <param name="tagService">Service of the tags.</param>
+        public GetTagByNameQueryHandler(ITagCosmosService tagService)
         {
             this.tagService = tagService;
         }
 
         /// <inheritdoc/>
-        public async Task<CosmosTag?> Handle(AddTagCommand request, CancellationToken cancellationToken)
+        public async Task<CosmosTag?> Handle(GetTagByNameQuery request, CancellationToken cancellationToken)
         {
-            return await this.tagService.AddTag(request.Variants);
+            return await this.tagService.SearchTag(request.Name);
         }
     }
 }

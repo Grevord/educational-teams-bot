@@ -12,27 +12,33 @@ namespace EducationalTeamsBotApi.Application.Tags.Commands.DeleteTagCommand
     using System.Text;
     using System.Threading.Tasks;
     using EducationalTeamsBotApi.Application.Common.Interfaces;
+    using MediatR;
 
-    public class DeleteTagCommandHandler
+    public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand, Unit>
     {
         /// <summary>
      /// Tag service.
      /// </summary>
-        private readonly ITagService tagService;
+        private readonly ITagCosmosService tagService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetTagsQueryHandler"/> class.
+        /// Initializes a new instance of the <see cref="DeleteTagCommandHandler"/> class.
         /// </summary>
-        public DeleteTagCommandHandler(ITagService tagService)
+        /// <param name="tagService">Service of the tag.</param>
+        public DeleteTagCommandHandler(ITagCosmosService tagService)
         {
             this.tagService = tagService;
         }
 
-        /// <inheritdoc/>
-        public async void Handle(DeleteTagCommand request, CancellationToken cancellationToken)
+        /// <summary>
+        /// Handler of the tag deletion.
+        /// </summary>
+        /// <param name="request">Delete request.</param>
+        /// <param name="cancellationToken">Token of cancellation.</param>
+        /// <returns>A Unit.</returns>
+        Task<Unit> IRequestHandler<DeleteTagCommand, Unit>.Handle(DeleteTagCommand request, CancellationToken cancellationToken)
         {
-            this.tagService.DeleteTag(request.idTag);
-            return;
+            return this.tagService.DeleteTag(request.Id);
         }
     }
 }

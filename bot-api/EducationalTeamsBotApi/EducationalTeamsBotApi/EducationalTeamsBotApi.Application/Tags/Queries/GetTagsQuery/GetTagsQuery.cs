@@ -3,9 +3,9 @@
 // Copyright (c) DIIAGE 2022. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
+
 namespace EducationalTeamsBotApi.Application.Tags.Queries.GetTagsQuery
 {
-    using EducationalTeamsBotApi.Application.Common.Models;
     using EducationalTeamsBotApi.Domain.Entities;
     using MediatR;
 
@@ -14,6 +14,10 @@ namespace EducationalTeamsBotApi.Application.Tags.Queries.GetTagsQuery
     /// </summary>
     public class GetTagsQuery : IRequest<IEnumerable<CosmosTag>>
     {
-        public string name { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the name of the tag.
+        /// </summary>
+        public string Name { get; set; }
     }
 }

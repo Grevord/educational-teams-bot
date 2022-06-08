@@ -1,22 +1,24 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="GetTagsQueryHandler.cs" company="DIIAGE">
+// <copyright file="GetTagQueryHandler.cs" company="DIIAGE">
 // Copyright (c) DIIAGE 2022. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
-namespace EducationalTeamsBotApi.Application.Tags.Queries.GetTagsQuery
+
+namespace EducationalTeamsBotApi.Application.Tags.Queries.GetTagQuery
 {
+    using System;
     using System.Collections.Generic;
-    using System.Threading;
+    using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using EducationalTeamsBotApi.Application.Common.Interfaces;
-    using EducationalTeamsBotApi.Application.Common.Models;
     using EducationalTeamsBotApi.Domain.Entities;
     using MediatR;
 
     /// <summary>
-    /// Handler for the query that will get tags.
+    /// Query handler for the tag research.
     /// </summary>
-    public class GetTagsQueryHandler : IRequestHandler<GetTagsQuery, IEnumerable<CosmosTag>>
+    public class GetTagQueryHandler : IRequestHandler<GetTagQuery, CosmosTag?>
     {
         /// <summary>
         /// Tag service.
@@ -24,18 +26,18 @@ namespace EducationalTeamsBotApi.Application.Tags.Queries.GetTagsQuery
         private readonly ITagCosmosService tagService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetTagsQueryHandler"/> class.
+        /// Initializes a new instance of the <see cref="GetTagQueryHandler"/> class.
         /// </summary>
-        /// <param name="tagService"> Service of the tag.</param>
-        public GetTagsQueryHandler(ITagCosmosService tagService)
+        /// <param name="tagService">Service of the tag.</param>
+        public GetTagQueryHandler(ITagCosmosService tagService)
         {
             this.tagService = tagService;
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<CosmosTag>> Handle(GetTagsQuery request, CancellationToken cancellationToken)
+        public async Task<CosmosTag?> Handle(GetTagQuery request, CancellationToken cancellationToken)
         {
-            return await this.tagService.GetTags();
+            return await this.tagService.GetTag(request.Id);
         }
     }
 }
