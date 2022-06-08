@@ -7,6 +7,7 @@
 namespace EducationalTeamsBotApi.WebApi.Controllers
 {
     using EducationalTeamsBotApi.Application.Teams.Queries.GetJoinedTeamsQuery;
+    using EducationalTeamsBotApi.Application.Teams.Queries.GetTeamChannels;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -24,6 +25,18 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         {
             var joinedTeams = await this.Mediator.Send(new GetJoinedTeamsQuery());
             return this.Ok(joinedTeams);
+        }
+
+        /// <summary>
+        /// Get the listf of channels of a team.
+        /// </summary>
+        /// <param name="teamId">Graph team identifier.</param>
+        /// <returns>A list of channels.</returns>
+        [HttpGet("{teamId}")]
+        public async Task<IActionResult> GetTeamChannels(string teamId)
+        {
+            var channels = await this.Mediator.Send(new GetTeamChannelsQuery { TeamId = teamId });
+            return this.Ok(channels);
         }
     }
 }

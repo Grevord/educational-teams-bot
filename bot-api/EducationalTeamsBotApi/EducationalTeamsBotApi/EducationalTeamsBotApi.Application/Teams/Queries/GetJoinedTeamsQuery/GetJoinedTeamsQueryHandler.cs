@@ -3,6 +3,7 @@
 // Copyright (c) DIIAGE 2022. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
+
 namespace EducationalTeamsBotApi.Application.Teams.Queries.GetJoinedTeamsQuery
 {
     using System.Threading;
@@ -12,7 +13,7 @@ namespace EducationalTeamsBotApi.Application.Teams.Queries.GetJoinedTeamsQuery
     using Microsoft.Graph;
 
     /// <summary>
-    /// Handler for joined teams query.
+    /// Handler for <see cref="GetJoinedTeamsQuery"/>.
     /// </summary>
     public class GetJoinedTeamsQueryHandler : IRequestHandler<GetJoinedTeamsQuery, IEnumerable<Team>>
     {
@@ -31,9 +32,9 @@ namespace EducationalTeamsBotApi.Application.Teams.Queries.GetJoinedTeamsQuery
         }
 
         /// <inheritdoc/>
-        public Task<IEnumerable<Team>> Handle(GetJoinedTeamsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Team>> Handle(GetJoinedTeamsQuery request, CancellationToken cancellationToken)
         {
-            return this.graphService.GetJoinedTeams();
+            return await this.graphService.GetJoinedTeams();
         }
     }
 }

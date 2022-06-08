@@ -21,6 +21,13 @@ namespace EducationalTeamsBotApi.Application.Common.Interfaces
         Task<IEnumerable<CosmosQuestion>> GetCosmosQuestions();
 
         /// <summary>
+        /// Inserts a list of <see cref="CosmosQuestion"/> in database.
+        /// </summary>
+        /// <param name="questions">Questions to insert.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        Task<IEnumerable<CosmosQuestion>> InsertCosmosQuestions(List<CosmosQuestion> questions);
+
+        /// <summary>
         /// Get a specific question.
         /// </summary>
         /// <param name="id">the identifier of a question.</param>

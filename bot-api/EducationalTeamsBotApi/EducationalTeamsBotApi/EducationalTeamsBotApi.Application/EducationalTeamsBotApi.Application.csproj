@@ -38,7 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Messages\Commands\" />
     <Folder Include="Teams\Commands\" />
     <Folder Include="Users\Commands\" />
   </ItemGroup>
