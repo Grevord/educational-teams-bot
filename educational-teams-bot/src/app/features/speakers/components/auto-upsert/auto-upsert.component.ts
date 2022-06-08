@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { Tag } from 'src/app/shared/classes/tag';
 import { Speaker } from 'src/app/shared/classes/speaker';
+import { AutoCrudService } from 'src/app/shared/services/auto-crud.service';
 @Component({
   selector: 'app-auto-upsert',
   templateUrl: './auto-upsert.component.html',
@@ -16,15 +17,14 @@ export class AutoUpsertComponent implements OnInit {
   optionList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   @Input() object!: any;
   tipe = require('tipe');
-  constructor(private fb: FormBuilder,@Inject(MAT_DIALOG_DATA, ) data: any) { 
+  constructor(private autoCrudService: AutoCrudService,private fb: FormBuilder,@Inject(MAT_DIALOG_DATA, ) data: any) { 
     this.myForm = this.fb.group({});
-    this.object = new data['object']
+    this.object = data['object']
     console.log(this.object);
    let test = this.propertyOfObject(this.object)
    
 test.forEach(element => {
-  this.myForm.addControl(element, this.fb.control(null))
-     
+  this.myForm.addControl(element, this.fb.control(this.object[element]))
 });
 
   }
@@ -51,14 +51,13 @@ test.forEach(element => {
   }
   propertyOfObject(object:any) {
     return Object.keys(object)
+    
   }
 
   listOfType(type:any){
-    console.log('allo ?');
-    
-    console.log(this.propertyOfObject(type));
-    let test2 = (type instanceof  Tag)
-    console.log(test2);
+   let test = this.autoCrudService.fetchList(type[0].constructor.name.toLowerCase());
+   console.log(test);
+   
     return ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   }
 }

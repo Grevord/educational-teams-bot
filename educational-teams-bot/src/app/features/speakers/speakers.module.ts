@@ -8,7 +8,10 @@ import { AutoUpsertComponent } from './components/auto-upsert/auto-upsert.compon
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -25,6 +28,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
     ReactiveFormsModule 
   ]
 })

@@ -63,7 +63,7 @@ const imports = [
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [...imports, BrowserAnimationsModule],
+  imports: [...imports, BrowserAnimationsModule, MatDialogModule],
   providers: [],
   bootstrap: [AppComponent],
 })

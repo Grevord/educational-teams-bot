@@ -13,6 +13,18 @@ import { AutoUpsertComponent } from '../auto-upsert/auto-upsert.component';
 export class AutoTableComponent implements OnInit {
 
   @Input() objectList!: any[];
+  /*
+  @Input()
+  get objectList(): any[] { 
+    console.log('le log du get');
+    
+    return this._objectList; }
+  set objectList(objectList: any[]) {
+    this.objectProperties= this.propertyOfObject(objectList)
+  }
+  private _objectList = [];
+  @Input() objectProperties! : any[]
+  */
   @Input() delete!: Function;
   tipe = require('tipe');
   constructor(public dialog: MatDialog) { 
@@ -41,8 +53,6 @@ export class AutoTableComponent implements OnInit {
   listModal(objects:any[]) {
     
     let dialogRef = this.dialog.open(AutoListComponent, {
-      width: '600px',
-      height: '400px',
       data: {objectsList: objects, }
     }
     );
@@ -53,8 +63,6 @@ export class AutoTableComponent implements OnInit {
   edit(object:any) {
     
     let dialogRef = this.dialog.open(AutoUpsertComponent, {
-      width: '1200px',
-      height: '800px',
       data: {object: object, }
     }
     );
