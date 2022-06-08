@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'speakers',
     component: SpeakersComponent,
-  }
+  },
   {
     path: 'questions',
     component: QuestionsComponent
