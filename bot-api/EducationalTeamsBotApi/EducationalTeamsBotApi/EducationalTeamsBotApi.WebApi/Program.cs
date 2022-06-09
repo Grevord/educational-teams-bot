@@ -71,6 +71,7 @@ try
     {
         options.AddDefaultPolicy(builder =>
         {
+            builder.AllowAnyMethod();
             builder.AllowAnyOrigin();
             builder.AllowAnyHeader();
         });
@@ -120,7 +121,7 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
-
+    app.UseCors();
     app.Run();
 
 }

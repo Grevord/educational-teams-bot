@@ -5,7 +5,7 @@
 <div *ngIf="object != undefined">
         <table style="width:100%;text-align: end;">
           <ng-container [formGroup]="myForm">
-            <tr *ngFor="let property of propertyOfObject(object)" >
+            <tr *ngFor="let property of objectProperties" >
                     <th *ngIf="tipe(object[property]) == 'array'"><mat-form-field appearance="fill">
                         <mat-label>{{property | titlecase}}</mat-label>
                         <mat-select [formControlName]="property" multiple>

@@ -1,8 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatFormField } from '@angular/material/form-field';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import { FormArray } from '@angular/forms';
 import { Tag } from 'src/app/shared/classes/tag';
 import { Speaker } from 'src/app/shared/classes/speaker';
 import { AutoCrudService } from 'src/app/shared/services/auto-crud.service';
@@ -13,19 +11,32 @@ import { AutoCrudService } from 'src/app/shared/services/auto-crud.service';
 })
 export class AutoUpsertComponent implements OnInit {
   myForm!: FormGroup
+  _object: any
 
-  optionList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-  @Input() object!: any;
+  @Input()
+  get object() {
+    console.log('GET');
+    
+    return this._object
+  }
+  set object(value: any) {
+    console.log('test');
+    
+    this.objectProperties = this.propertyOfObject(value);
+    this.myForm = this.fb.group({});
+    this.objectProperties.forEach((object) => {
+      this.myForm.addControl(object, this.fb.control(value[object]))
+    });
+    this._object = value;
+  }
+   objectProperties: string[] =[];
+  
   tipe = require('tipe');
   constructor(private autoCrudService: AutoCrudService,private fb: FormBuilder,@Inject(MAT_DIALOG_DATA, ) data: any) { 
-    this.myForm = this.fb.group({});
+
     this.object = data['object']
     console.log(this.object);
-   let test = this.propertyOfObject(this.object)
    
-test.forEach(element => {
-  this.myForm.addControl(element, this.fb.control(this.object[element]))
-});
 
   }
 
