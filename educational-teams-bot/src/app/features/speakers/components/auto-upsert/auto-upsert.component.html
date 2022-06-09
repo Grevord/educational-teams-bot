@@ -3,7 +3,7 @@
     <mat-icon class="close-icon" color="warn">close</mat-icon>
   </button>
 <div *ngIf="object != undefined">
-        <table style="width:100%;text-align: end;">
+        <table style="width:100%;text-align: end;" aria-label="auto upsert table">
           <ng-container [formGroup]="myForm">
             <tr *ngFor="let property of objectProperties" >
                     <th *ngIf="tipe(object[property]) == 'array'"><mat-form-field appearance="fill">
