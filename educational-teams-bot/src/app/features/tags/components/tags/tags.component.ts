@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Tag } from '../../../../../entities/tag';
 
 @Component({
   selector: 'app-dashboard',
