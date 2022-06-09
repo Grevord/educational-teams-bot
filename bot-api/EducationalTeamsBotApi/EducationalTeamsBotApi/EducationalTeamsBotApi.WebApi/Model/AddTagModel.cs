@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
 namespace EducationalTeamsBotApi.WebApi.Model
 {
     /// <summary>
@@ -23,6 +25,7 @@ namespace EducationalTeamsBotApi.WebApi.Model
         /// <summary>
         /// Gets or Sets the variants of the tag.
         /// </summary>
+        [JsonProperty("variants")]
         public List<string> Variants { get; set; }
     }
 }

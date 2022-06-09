@@ -64,8 +64,7 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         /// </summary>
         /// <param name="id">Identifier of the tag to search.</param>
         /// <returns>A tag.</returns>
-        [HttpGet]
-        [Route("GetTag/{id}")]
+        [HttpGet("{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetTag(string id)
         {
@@ -83,7 +82,7 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         /// </summary>
         /// <param name="model">model containing the tag identifier and the variant.</param>
         /// <returns>The updated tag.</returns>
-        [HttpPost]
+        [HttpPut]
         [Route("EditTagVariant")]
         [AllowAnonymous]
         public async Task<IActionResult> EditTagVariant(EditTagVariantModel model)
@@ -111,9 +110,9 @@ namespace EducationalTeamsBotApi.WebApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> AddTag(AddTagModel model)
         {
-            if (model.Variants.Any())
+            if (!model.Variants.Any())
             {
-                throw new Exception();
+                throw new Exception("The list of variant is empty.");
             }
 
             var tags = await this.Mediator.Send(new AddTagCommand
