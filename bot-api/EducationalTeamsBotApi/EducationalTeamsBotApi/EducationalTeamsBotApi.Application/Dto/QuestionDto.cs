@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace EducationalTeamsBotApi.Application.Common.Models
+namespace EducationalTeamsBotApi.Application.Dto
 {
     using AutoMapper;
     using EducationalTeamsBotApi.Application.Common.Mappings;

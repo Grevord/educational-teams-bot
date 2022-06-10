@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace EducationalTeamsBotApi.Application.Generic.Queries
+namespace EducationalTeamsBotApi.Application.Pagination.Queries
 {
     using EducationalTeamsBotApi.Application.Common.Models;
     using MediatR;

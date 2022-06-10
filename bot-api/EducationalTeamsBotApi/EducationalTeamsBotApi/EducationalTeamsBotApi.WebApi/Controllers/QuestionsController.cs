@@ -6,8 +6,8 @@
 
 namespace EducationalTeamsBotApi.WebApi.Controllers
 {
-    using EducationalTeamsBotApi.Application.Common.Models;
-    using EducationalTeamsBotApi.Application.Generic.Queries;
+    using EducationalTeamsBotApi.Application.Dto;
+    using EducationalTeamsBotApi.Application.Pagination.Queries;
     using EducationalTeamsBotApi.Application.Questions.Commands.AskQuestion;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
