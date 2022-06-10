@@ -7,8 +7,14 @@ import { QuestionsModule } from './questions/questions.module';
 import { TagsModule } from './tags/tags.module';
 
 @NgModule({
-  declarations: [
+  declarations: [],
+  imports: [
+    CommonModule,
+    DashboardModule,
+    SpeakersModule,
+    FeaturesRoutingModule,
+    QuestionsModule,
+    TagsModule,
   ],
-  imports: [CommonModule, DashboardModule, SpeakersModule, FeaturesRoutingModule, QuestionsModule, TagsModule],
 })
 export class FeaturesModule {}

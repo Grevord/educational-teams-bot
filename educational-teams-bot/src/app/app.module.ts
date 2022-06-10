@@ -13,9 +13,11 @@ import { environment } from 'src/environments/environment';
 import { FeaturesModule } from './features/features.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { StoreModule } from '@ngrx/store';
+import { questionsReducer } from './features/questions/state/questions.reducer';
 
 const imports = [
   BrowserModule,
@@ -27,7 +29,6 @@ const imports = [
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  
   MsalModule.forRoot(
     new PublicClientApplication({
       auth: {
@@ -42,9 +43,7 @@ const imports = [
     {
       interactionType: InteractionType.Redirect, // MSAL Guard Configuration
       authRequest: {
-        scopes: [
-          'User.Read.All'
-        ],
+        scopes: ['User.Read.All'],
       },
     },
     {
@@ -59,6 +58,7 @@ const imports = [
     }
   ),
   FeaturesModule,
+  StoreModule.forRoot({ questions: questionsReducer }),
 ];
 
 @NgModule({
