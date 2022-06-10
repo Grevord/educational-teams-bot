@@ -1,0 +1,13 @@
+<div *ngIf="object != undefined">
+    <img style="
+    width: 150px;
+" src="../../../../../assets/images/delete.png">
+    
+        <div>
+            <button mat-flat-button color="primary" style="background-color: grey;" aria-label="Cancel Button">No</button>
+            <button mat-flat-button color="warn" aria-label="Delete Button">Yes</button>
+        </div>
+    <div *ngIf="object == undefined">
+        <div>Un problème est survenu durant le chargement des données</div>
+    </div>
+</div>

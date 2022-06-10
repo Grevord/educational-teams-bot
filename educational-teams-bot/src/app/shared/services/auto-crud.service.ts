@@ -23,11 +23,11 @@ export class AutoCrudService {
           'Content-Type':  'application/json'
         })
       }
-      /*let test = this.http.get('http://localhost:5025/api/Tags', httpOptions)
+      let test = this.http.get('http://localhost:5025/api/Tags', httpOptions)
       test.subscribe(value => {
         console.log(value); 
 
-      })*/
+      })
     }
     
     return ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];

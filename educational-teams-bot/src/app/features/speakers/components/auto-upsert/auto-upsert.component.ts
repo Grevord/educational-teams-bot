@@ -12,25 +12,33 @@ import { AutoCrudService } from 'src/app/shared/services/auto-crud.service';
 export class AutoUpsertComponent implements OnInit {
   myForm!: FormGroup
   _object: any
-
+  children?:any
   @Input()
   get object() {
-    console.log('GET');
-    
     return this._object
   }
   set object(value: any) {
-    console.log('test');
-    
+   /* 
+    const properties = this.propertyOfObject(value);
+    this.objectProperties = properties.reduce((acc, property) => {
+
+      const propertyType = this.tipe(value[property])
+      const propertyInfo:never = { propertyType, propertyName: value, children}
+      if(propertyType === 'array') {
+        propertyInfo.children = this.listOfType(value[property])
+      }
+      acc.push(propertyInfo)
+      return acc
+    }, [])*/
+
     this.objectProperties = this.propertyOfObject(value);
     this.myForm = this.fb.group({});
-    this.objectProperties.forEach((object) => {
+    this.objectProperties.forEach((object: string) => {
       this.myForm.addControl(object, this.fb.control(value[object]))
     });
     this._object = value;
   }
-   objectProperties: string[] =[];
-  
+   objectProperties: any 
   tipe = require('tipe');
   constructor(private autoCrudService: AutoCrudService,private fb: FormBuilder,@Inject(MAT_DIALOG_DATA, ) data: any) { 
 
@@ -43,23 +51,6 @@ export class AutoUpsertComponent implements OnInit {
   ngOnInit(): void {
   
   }
-  customType(object:any)
-  {
-    
-    if(object instanceof Speaker)
-    {
-      return true
-      
-    }
-    else if(object instanceof Tag)
-    {
-      return true
-    }
-    else
-    {
-      return false
-    }
-  }
   propertyOfObject(object:any) {
     return Object.keys(object)
     
@@ -69,6 +60,6 @@ export class AutoUpsertComponent implements OnInit {
    let test = this.autoCrudService.fetchList(type[0].constructor.name.toLowerCase());
    console.log(test);
    
-    return ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+    return ['Php', 'C#', 'CSS', 'HTML', 'JS', 'Java', 'Angular'];
   }
 }

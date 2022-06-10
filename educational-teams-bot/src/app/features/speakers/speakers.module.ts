@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AutoDeleteComponent } from './components/auto-delete/auto-delete.component';
 
 
 
@@ -21,7 +22,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     SpeakerItemComponent,
     AutoTableComponent,
     AutoListComponent,
-    AutoUpsertComponent
+    AutoUpsertComponent,
+    AutoDeleteComponent
   ],
   imports: [
     CommonModule,

@@ -5,7 +5,7 @@
         <div *ngIf="tipe(object[property]) === 'array'">{{property | titlecase}}: {{object[property].length}}<span (click)="listModal(object[property])" class="icon"><em class="fa-solid fa-list"></em></span></div>
         <div *ngIf="tipe(object[property]) != 'array' && property != 'id'"> {{object[property]}}</div>
      </th>
-     <th> <table aria-label="button table"><tr><th><span (click)="edit(object)" class="icon"><em class="fa-solid fa-pen-to-square"></em></span></th><th><span (click)="edit(object)" class="icon"><em class="fa-solid fa-trash"></em></span></th></tr></table></th></tr></table></div>
+     <th> <table aria-label="button table"><tr><th><span (click)="edit(object)" class="icon"><em class="fa-solid fa-pen-to-square"></em></span></th><th><span (click)="delete(object)" class="icon"><em class="fa-solid fa-trash"></em></span></th></tr></table></th></tr></table></div>
 </div>
 
 <!-- <div *ngIf="objectList != undefined">
