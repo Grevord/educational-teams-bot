@@ -15,12 +15,12 @@
 
         # Deploy ARM template
       - name: Run ARM deploy
-        uses: azure/arm-deploy@v1
-        with:
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-          resourceGroupName: testdeploy
-          template: /arm_templates/arm_deploy_ressources.json, /arm_templates/arm_deploy_ressources.parameters.dev.json   
-          parameters: ressource_base_name=qbot, rgname=testdeploy, rg_location=francecentral, appName=qbot
-
+        env:
+          INPUT_SCOPE: subscription
+          INPUT_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION }}
+          INPUT_TEMPLATE: https://raw.githubusercontent.com/Grevord/educational-teams-bot/features/arm_templates/arm_templates/arm_deploy_ressources.json
+          INPUT_PARAMETERS: https://raw.githubusercontent.com/Grevord/educational-teams-bot/features/arm_templates/arm_templates/arm_deploy_ressources.parameters.dev.json ressources_base_name=qbot rgname=testdeploy rg_location=francecentral appName=qbot 
+          INPUT_DEPLOYMENTNAME: test-deploy-dev
+          
         # output containerName variable from template
       - run: echo ${{ steps.deploy.outputs.containerName }}
