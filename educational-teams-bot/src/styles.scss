@@ -49,10 +49,11 @@ body {
     height: 100vh;
     background : $primary-color;
     min-height:100vh;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html { height: 100%; }
 
 .border-right {
     border-right: 0.1em solid $third-color;
@@ -73,7 +74,3 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         font-size: 1.5em;
     }
 }
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
