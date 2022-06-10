@@ -15,6 +15,7 @@
 
         # Deploy ARM template
       - name: Run ARM deploy
+        uses: azure/arm-deploy@v1
         env:
           INPUT_SCOPE: subscription
           INPUT_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION }}
