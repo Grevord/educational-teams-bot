@@ -1,0 +1,25 @@
+  on: [push]
+  name: Azure ARM
+  jobs:
+    build-and-deploy:
+      runs-on: ubuntu-latest
+      steps:
+
+        # Checkout code
+      - uses: actions/checkout@main
+
+        # Log into Azure
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+        # Deploy ARM template
+      - name: Run ARM deploy
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          template: /arm_templates/arm_deploy_ressources.json, /arm_templates/arm_deploy_ressources.parameters.dev.json   
+          parameters: ressource_base_name=qbot, rgname=testdeploy, rg_location=francecentral, appName=qbot
+
+        # output containerName variable from template
+      - run: echo ${{ steps.deploy.outputs.containerName }}
