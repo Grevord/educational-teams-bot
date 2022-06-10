@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Speaker } from 'src/app/shared/classes/speaker';
-import { Tag } from 'src/app/shared/classes/tag';
+import { Speaker } from '../../classes/speaker';
+import { Tag } from '../../classes/tag';
 import { MatDialog } from '@angular/material/dialog';
 import { AutoListComponent } from '../auto-list/auto-list.component';
 import { AutoUpsertComponent } from '../auto-upsert/auto-upsert.component';
