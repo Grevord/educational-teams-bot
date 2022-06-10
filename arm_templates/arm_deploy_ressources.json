@@ -1,10 +1,23 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptiondeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        //Nom de base pour les ressources
        "ressources_base_name": {
+            "type": "string"   
+        },
+
+        //nom du groupe de ressources
+        "rgname": {
             "type": "string"
         },
+
+        //localisation du groupe de ressources
+        "rg_location": {
+            "type": "string"
+        },
+
+        //Environnement de deploiement
         "env": {
             "type": "string",
             "allowedValues": [
@@ -13,13 +26,18 @@
                 "prod"
             ]
         },
+
+        //Nom de l'application
         "appName": {
             "type": "string"          
         },
+
         "azureSearchLocation": {
             "type": "string"
             
         },
+
+        //Configuration du plan app service
         "sku": {
             "type": "string",
             "defaultValue": "F0",
@@ -45,6 +63,8 @@
         "searchHostingMode": {
             "type": "string"
         },
+
+        //Nom du compte de base de données
         "databaseAccounts_dibotaccount_name": {
             "type": "String"
         }
@@ -54,6 +74,7 @@
         "serverfarmName": "[concat(parameters('ressources_base_name'), '-serviceapp-',parameters('env'))]",
         "frontName":"[concat(parameters('ressources_base_name'), '-front-',parameters('env'))]",
         "apiName": "[concat(parameters('ressources_base_name'), '-api-',parameters('env'))]",
+        "rgName": "[concat(parameters('rgname'),'-',parameters('env'))]",
         
         "tagRessource":"[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('serverfarmName'))]",
         
@@ -65,11 +86,20 @@
     
     },
     "resources": [
+     {
+         "name": "[variables('rgName')]",
+         "type": "Microsoft.Resources/resourceGroups",
+         "apiVersion": "2021-05-01",
+         "location": "[parameters('rg_location')]",
+         "dependsOn": [],
+         "tags": {"[variables('tagRessource')]": "Resource",
+                "displayName": "[variables('rgName')]"}
+     },
         {
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2016-09-01",
             "name": "[variables('serverfarmName')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('rg_location')]",
             "properties": {
                 "name": "[variables('serverfarmName')]",
                 "hostingEnvironment": "",
@@ -84,7 +114,7 @@
             "name": "[variables('frontName')]",
             "type": "Microsoft.Web/sites",
             "apiVersion": "2020-12-01",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('rg_location')]",
             "tags": {
                 "[variables('tagRessource')]": "Resource",
                 "displayName": "[variables('frontName')]"
@@ -101,7 +131,7 @@
             "name": "[variables('apiName')]",
             "type": "Microsoft.Web/sites",
             "apiVersion": "2020-12-01",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('rg_location')]",
             "tags": {
                 "[variables('tagRessource')]": "Resource",
                 "displayName": "[variables('apiName')]"
@@ -122,7 +152,7 @@
             "tags": {
                 "displayName": "[variables('storageAccountsName')]"
             },
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('rg_location')]",
             "kind": "StorageV2",
             "sku": {
                 "name": "Standard_LRS"
@@ -132,7 +162,7 @@
             "type": "Microsoft.DocumentDB/databaseAccounts",
             "apiVersion": "2022-02-15-preview",
             "name": "[parameters('databaseAccounts_dibotaccount_name')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('rg_location')]",
             "tags": {
                 "defaultExperience": "Core (SQL)",
                 "hidden-cosmos-mmspecial": ""
@@ -164,7 +194,7 @@
                 },
                 "locations": [
                     {
-                        "locationName": "[resourceGroup().location]",
+                        "locationName": "[parameters('rg_location')]",
                         "provisioningState": "Succeeded",
                         "failoverPriority": 0,
                         "isZoneRedundant": false

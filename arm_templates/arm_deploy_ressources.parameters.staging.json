@@ -8,6 +8,12 @@
         "env": {
             "value": "staging"
         },
+        "rgname": {
+            "value": ""
+        },
+        "rg_location":{
+            "value": ""
+        },
         "appName": {
             "value": "" 
         },
