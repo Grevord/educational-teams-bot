@@ -1,9 +1,9 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Tag } from 'src/app/shared/classes/tag';
-import { Speaker } from 'src/app/shared/classes/speaker';
-import { AutoCrudService } from 'src/app/shared/services/auto-crud.service';
+import { Tag } from '../../classes/tag';
+import { Speaker } from '../../classes/speaker';
+import { AutoCrudService } from '../../services/auto-crud.service';
 @Component({
   selector: 'app-auto-upsert',
   templateUrl: './auto-upsert.component.html',
