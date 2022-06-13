@@ -5,16 +5,16 @@
 <div *ngIf="object != undefined">
         <table style="width:100%;text-align: end;" aria-label="auto upsert table">
           <ng-container [formGroup]="myForm">
-            <tr *ngFor="let property of objectProperties" >
-                    <th *ngIf="tipe(object[property]) == 'array'"><mat-form-field appearance="fill">
-                        <mat-label>{{property | titlecase}}</mat-label>
-                        <mat-select [formControlName]="property" multiple>
-                          <mat-option *ngFor="let option of listOfType(object[property])" [value]="option">{{option}}</mat-option>
+            <tr *ngFor="let objectProperty of objectProperties" >
+                    <th *ngIf="objectProperty.propertyType == 'array'"><mat-form-field appearance="fill">
+                        <mat-label>{{objectProperty.propertyName | titlecase}}</mat-label>
+                        <mat-select [formControlName]="objectProperty.propertyName" multiple>
+                          <mat-option *ngFor="let option of objectProperty.children" [value]="option">{{option}}</mat-option>
                         </mat-select>
                       </mat-form-field></th>
-                    <th *ngIf="tipe(object[property]) != 'array' && property != 'id'">  <mat-form-field appearance="fill">
-                        <mat-label>{{property  | titlecase}}</mat-label>
-                        <input [formControlName]="property" matInput>
+                    <th *ngIf="objectProperty.propertyType != 'array' && objectProperty.propertyName != 'id'">  <mat-form-field appearance="fill">
+                        <mat-label>{{objectProperty.propertyName  | titlecase}}</mat-label>
+                        <input [formControlName]="objectProperty.propertyName" matInput>
                       </mat-form-field></th>
                 
             </tr>

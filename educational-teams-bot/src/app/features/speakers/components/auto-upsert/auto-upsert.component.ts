@@ -15,34 +15,36 @@ export class AutoUpsertComponent implements OnInit {
   children?:any
   @Input()
   get object() {
+
     return this._object
   }
-  set object(value: any) {
-   /*
-    const properties = this.propertyOfObject(value);
-    this.objectProperties = properties.reduce((acc, property) => {
+    set object(value: any) {
+      const properties = this.propertyOfObject(value);
+      this.objectProperties = properties.reduce((acc: ObjectProperties[], property) => {
+        const propertyType = this.tipe(value[property])
+        const propertyInfo : ObjectProperties = { propertyType, propertyName: property }
+        if(propertyType === 'array') {
+          this.listOfType(value[property]).then((list) => {
+            propertyInfo.children = list
+          })
+        }
+        acc.push(propertyInfo)
+        return acc
+      }, [])
+      console.log(this.objectProperties);
 
-      const propertyType = this.tipe(value[property])
-      const propertyInfo:never = { propertyType, propertyName: value, children}
-      if(propertyType === 'array') {
-        propertyInfo.children = this.listOfType(value[property])
-      }
-      acc.push(propertyInfo)
-      return acc
-    }, [])*/
-
-    this.objectProperties = this.propertyOfObject(value);
     this.myForm = this.fb.group({});
-    this.objectProperties.forEach((object: string) => {
-      this.myForm.addControl(object, this.fb.control(value[object]))
+    this.objectProperties.forEach((object) => {
+      this.myForm.addControl(object.propertyName, this.fb.control(value[object.propertyName]))
     });
     this._object = value;
   }
-   objectProperties: any
+  objectProperties: ObjectProperties[] = [];
   tipe = require('tipe');
   constructor(private autoCrudService: AutoCrudService,private fb: FormBuilder,@Inject(MAT_DIALOG_DATA, ) data: any) {
 
     this.object = data['object']
+    console.log("log");
     console.log(this.object);
 
 
@@ -56,10 +58,16 @@ export class AutoUpsertComponent implements OnInit {
 
   }
 
-  listOfType(type:any){
-   let test = this.autoCrudService.fetchList(type[0].constructor.name.toLowerCase());
+  async listOfType(type:any){
+   let test = await this.autoCrudService.fetchList(type[0].constructor.name.toLowerCase());
+   console.log("log list of type");
    console.log(test);
 
-    return ['Php', 'C#', 'CSS', 'HTML', 'JS', 'Java', 'Angular'];
+    return test
   }
+}
+interface ObjectProperties {
+  propertyType: string,
+  propertyName: string,
+  children?: string[]
 }

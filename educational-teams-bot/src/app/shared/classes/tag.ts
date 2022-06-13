@@ -6,8 +6,4 @@ export class Tag {
         this.id = id;
         this.libelle = libelle;
     }
-
-    list(){
-return ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-    }
   }

@@ -14,23 +14,22 @@ export class AutoCrudService {
   
     return ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   }
-  fetchList(type:string){
+  async fetchList(type:string){
 
-    if(type == "tag")
-    {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json'
         })
       }
-      let test = this.http.get('http://localhost:5025/api/Tags', httpOptions)
-      test.subscribe(value => {
-        console.log(value); 
-
+      let list
+       await this.http.get('http://localhost:5025/api/'+type+'s', httpOptions).subscribe(value => {
+         console.log(value);
+         
+        list = value
       })
-    }
-    
-    return ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+    await console.log(list);
+      
+      return list
     //return this.http.get("http://localhost:"+type+'s');
   }
 }
